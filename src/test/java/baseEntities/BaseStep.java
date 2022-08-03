@@ -1,22 +1,20 @@
 package baseEntities;
+import pages.*;
 
-import org.openqa.selenium.WebDriver;
-import pages.DashboardPage;
-import pages.LoginPage;
-import pages.ProjectsPage;
 
 public class BaseStep {
-    protected WebDriver driver;
-    protected LoginPage loginPage;
-    protected DashboardPage dashboardPage;
-    protected ProjectsPage projectsPage;
+    protected LoginPage loginPage = new LoginPage();
+    protected DashboardPage dashPage = new DashboardPage();
 
+    protected AddProjectPage addProjectsPage = new AddProjectPage();
+    protected ProjectOverviewPage projectOverviewPage = new ProjectOverviewPage();
 
-    public BaseStep(WebDriver driver) {
-        this.driver = driver;
+    protected TestSuitesPage testSuitesPage  = new TestSuitesPage();
 
-        loginPage = new LoginPage(driver);
-        dashboardPage = new DashboardPage(driver);
-        projectsPage = new ProjectsPage(driver);
-    }
+    protected AddTestSuitePage addTestSuitePage= new AddTestSuitePage();
+
+    protected TestSuiteOverviewPage testSuiteOverviewPage= new TestSuiteOverviewPage();
+
+    protected EditTestSuitePage editTestSuitePage =new EditTestSuitePage();
+
 }

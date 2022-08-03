@@ -1,11 +1,10 @@
-package configuration;
+package core;
 
 import java.io.IOException;
 import java.util.Properties;
 
 public class ReadProperties {
     private static final Properties properties;
-
 
 
     static {
@@ -25,6 +24,7 @@ public class ReadProperties {
         return properties.getProperty("browser");
     }
 
+
     public static String username() {
         return properties.getProperty("username");
     }
@@ -36,4 +36,10 @@ public class ReadProperties {
     public static boolean isHeadless() {
         return properties.getProperty("headless").equalsIgnoreCase("true");
     }
+    public static int timeout() {
+        return  Integer.parseInt(properties.getProperty("timeout"));
+
+    }
+
+
 }

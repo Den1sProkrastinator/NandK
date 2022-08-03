@@ -1,30 +1,45 @@
 package baseEntities;
 
-import configuration.ReadProperties;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.Configuration;
+import core.ReadProperties;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import services.BrowsersService;
-import steps.LoginStep;
-import steps.NavigationStep;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
+
+import steps.*;
+
+
 
 public class BaseTest {
-    protected WebDriver driver;
-    protected LoginStep loginStep;
-    protected NavigationStep navigationStep;
+
+    protected LoginStep loginStep = new LoginStep();
+    protected NavigationStep navigationStep= new NavigationStep();
+    protected DashboardStep dashboardStep = new DashboardStep();
+    protected AddProjectStep addprojectStep = new AddProjectStep();
+    protected ProjectOverviewStep projectOverviewStep = new ProjectOverviewStep();
+
+    protected TestSuitesStep testSuitesStep = new TestSuitesStep();
+    protected AddTestSuiteStep addTestSuiteStep = new AddTestSuiteStep();
+    protected TestSuiteOverviewStep testSuiteOverviewStep = new TestSuiteOverviewStep();
+    protected EditTestSuiteStep editTestSuiteStep  = new EditTestSuiteStep();
 
     @BeforeMethod
     public void setup() {
-        driver = new BrowsersService().getDriver();
 
-        loginStep = new LoginStep(driver);
-        navigationStep = new NavigationStep(driver);
+        Configuration.baseUrl = ReadProperties.getUrl();
+        Configuration.browser = ReadProperties.browserName();
+        Configuration.browserPosition = "10x10";
+        Configuration.browserSize = "1920x1080";
+        Configuration.fastSetValue = false;
 
-        driver.get(ReadProperties.getUrl());
     }
+
 
     @AfterMethod
-    public void tearDown() {
-        driver.quit();
+    public void tearDown(){
+        closeWebDriver();
     }
+
 }

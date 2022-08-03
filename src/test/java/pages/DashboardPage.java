@@ -1,36 +1,34 @@
 package pages;
 
 import baseEntities.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
+
+@Getter
 
 public class DashboardPage extends BasePage {
-    private final static String pagePath = "/index.php?/dashboard";
 
-    public TopMenuPage topMenuPage;
+    private final SelenideElement pageIdentifier
+            = $(byXpath("//div[contains(@class, 'content-header-title') and contains(text(), 'All Projects')]"));
 
-    // Блок описания селекторов для элементов
-    private By headerTitleLabelLocator = By.xpath("//div[contains(@class, 'content-header-title') and contains(text(), 'Dashboard')]");
-
-    public DashboardPage(WebDriver driver) {
-        super(driver);
-
-        topMenuPage = new TopMenuPage(driver);
-    }
-
+    private final SelenideElement addProjectButton = $(byClassName("sidebar-button"));
+    private SelenideElement iconHeaderTwitter = $x("//div[@class='icon-header-twitter')]");
+    private SelenideElement iconTwitterText = $x("//div[@class='tooltip']");
 
     @Override
-    protected By getPageIdentifier() {
-        return headerTitleLabelLocator;
+    public SelenideElement getPageIdentifier() {
+        return pageIdentifier;
     }
 
-    public void openPageByUrl() {
-        super.openPageByUrl(pagePath);
+    public SelenideElement openProjectByName(String projectName) {
+        String openProjectByName = "//a[text()='First']";
+        return $(byXpath(openProjectByName.replace("First", projectName)));
     }
 
-    // Блок атомарных методов
-    public WebElement getHeaderTitleLabel() {
-        return driver.findElement(headerTitleLabelLocator);
-    }
+
 }
