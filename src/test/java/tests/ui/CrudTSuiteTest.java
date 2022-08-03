@@ -11,15 +11,12 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.open;
-@Epic("Diploma UI tests")
-@Feature("Crud  tests")
+
 public class CrudTSuiteTest extends BaseTest {
-    @Description("Create functionality")
-    @Story("Create test suite with description ")
-    @Test(description = "create  suite test")
+    @Test(priority = 1)
     public void createSuiteTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
-        dashboardStep.openProject("aefae");
+        dashboardStep.openProject("Test project");
         projectOverviewStep.selectSuite();
         testSuitesStep.addTestSuite();
         addTestSuiteStep.createTestSuite("First Suite", "test purposes")
@@ -29,61 +26,52 @@ public class CrudTSuiteTest extends BaseTest {
 
     }
 
-    @Description("Read functionality")
-    @Story("Open suite")
-    @Test(description = "read test")
+    @Test(priority = 2)
     public void readSuiteTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
-        dashboardStep.openProject("Second");
+        dashboardStep.openProject("Test project");
         projectOverviewStep.selectSuite();
         testSuitesStep.openTestSuite("First Suite");
         testSuiteOverviewStep.selectEditTestSuite();
         editTestSuiteStep.getTestSuiteName()
                 .shouldHave(value("First Suite"));
-        editTestSuiteStep.getTestSuiteDescription()
-                .shouldHave(text("aefafaefaef"));
     }
 
-    @Description("update functionality and upload picture")
-    @Story("Edit description")
-    @Test(description = "update test")
+    @Test(priority = 3)
     public void updateSuiteTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
-        dashboardStep.openProject("aefae");
+        dashboardStep.openProject("Test project");
         projectOverviewStep.selectSuite();
         testSuitesStep.openTestSuite("First Suite");
         testSuiteOverviewStep.selectEditTestSuite();
-        editTestSuiteStep.editTestSuite("Second Suite", "qegegqegqeg")
+        editTestSuiteStep.editTestSuite("First Suite", "qegegqegqeg")
                 .getUpdateMessageLocator()
                 .shouldHave(text("Successfully updated the test suite."));
         navigationStep.navigateToDashboardFromTestSuiteOverviewPage();
     }
 
 
-    @Description("delete functionality")
-    @Story("Delete suite ")
-    @Test(description = "delete test")
+    @Test(priority = 5)
     public void deleteSuiteTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
-        dashboardStep.openProject("aefae");
+        dashboardStep.openProject("Test project");
         projectOverviewStep.selectSuite();
-        testSuitesStep.openTestSuite("Second Suite");
+        testSuitesStep.openTestSuite("First Suite");
         testSuiteOverviewStep.selectEditTestSuite();
-        editTestSuiteStep.deleteTestSuite("Second Suite")
+        editTestSuiteStep.deleteTestSuite("First Suite")
                 .getDeleteMessageLocator()
                 .shouldHave(text("Successfully deleted the test suite."));
     }
-    @Description("Read suite after update ")
-    @Story("Read updated suite")
-    @Test(description = "read suite after update test")
+
+    @Test(priority = 4)
     public void readSuiteAfterUpdateTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
-        dashboardStep.openProject("aefae");
+        dashboardStep.openProject("Test project");
         projectOverviewStep.selectSuite();
-        testSuitesStep.openTestSuite("Second Suite");
+        testSuitesStep.openTestSuite("First Suite");
         testSuiteOverviewStep.selectEditTestSuite();
         editTestSuiteStep.getTestSuiteName()
-                .shouldHave(value("Second Suite"));
+                .shouldHave(value("First Suite"));
         editTestSuiteStep.getTestSuiteDescription()
                 .shouldHave(text("qegegqegqeg"));
         navigationStep.navigateToDashboardFromEditTestSuitePage();

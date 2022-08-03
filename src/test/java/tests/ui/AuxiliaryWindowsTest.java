@@ -9,13 +9,10 @@ import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
-@Epic("Diploma UI tests")
-@Feature("Auxiliary windows tests")
+
 public class AuxiliaryWindowsTest extends BaseTest {
 
-    @Description("dialog window function delete  test")
-    @Story("Delete test suit ")
-    @Test(description = "dialog window delete test ")
+    @Test
     public void dialogWindowDeleteTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
         dashboardStep.openProject("First");
@@ -28,21 +25,17 @@ public class AuxiliaryWindowsTest extends BaseTest {
 
     }
 
-    @Description("Popup validation")
-    @Story("Popup exists")
-    @Test(description = "popup test")
+    @Test
     public void popupTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
         dashboardStep.popupText();
 
     }
 
-    @Description("Upload picture ")
-    @Story("Upload file")
-    @Test(description ="upload test")
+    @Test
     public void uploadTest() {
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
-        dashboardStep.openProject("aefae");
+        dashboardStep.openProject("Test project");
         projectOverviewStep.selectSuite();
         testSuitesStep.openTestSuite("First Suite");
         testSuiteOverviewStep.selectEditTestSuite();
